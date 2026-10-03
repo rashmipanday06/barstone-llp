@@ -1,0 +1,302 @@
+
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@300;400;500&display=swap");
+
+.bs-footer {
+  --black: #000;
+  --gold: #d4af37;
+  --gold-light: #f0cf65;    
+  --gold-deep: #a8841f;
+  --white: #fff;
+  --soft: rgba(255, 255, 255, 0.7);
+  --line: rgba(212, 175, 55, 0.3);
+
+  position: relative;
+  width: 100%;
+  background:
+    radial-gradient(
+      ellipse at 50% 0%,
+      rgba(212, 175, 55, 0.09),
+      transparent 60%
+    ),
+    #000;
+  color: #fff;
+  font-family: "Jost", system-ui, sans-serif;
+}
+
+.bs-footer *,
+.bs-footer *::before,
+.bs-footer *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.bs-footer::before {
+  content: "";
+  display: block;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--gold-deep),
+    var(--gold-light),
+    var(--gold-deep),
+    transparent
+  );
+}
+
+.bs-footer .crest {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 68px 32px 52px;
+  text-align: center;
+}
+
+.bs-footer .mono {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 22px;
+  border: 1px solid var(--gold);
+  transform: rotate(45deg);
+  display: grid;
+  place-items: center;
+}
+
+.bs-footer .mono span {
+  transform: rotate(-45deg);
+  font-family: "Cormorant Garamond", serif;
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--gold);
+}
+
+.bs-footer .crest h2 {
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 600;
+  font-size: clamp(2.4rem, 5vw, 3.4rem);
+  letter-spacing: 0.1em;
+  line-height: 1;
+  color: #fff;
+}
+
+.bs-footer .crest h2 em {
+  font-style: normal;
+  color: var(--gold);
+  font-weight: 500;
+  font-size: 0.5em;
+  letter-spacing: 0.3em;
+  margin-left: 0.5em;
+}
+
+.bs-footer .crest p {
+  margin: 18px auto 0;
+  max-width: 52ch;
+  font-weight: 300;
+  line-height: 1.8;
+  color: var(--soft);
+}
+
+.bs-footer .rule {
+  height: 1px;
+  max-width: 1116px;
+  margin: 0 auto;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--line),
+    transparent
+  );
+}
+
+.bs-footer .cols {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 52px 32px 56px;
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 72px;
+}
+
+.bs-footer h3 {
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 600;
+  font-size: 1.7rem;
+  color: var(--gold);
+}
+
+.bs-footer .sub {
+  margin: 4px 0 24px;
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: var(--soft);
+}
+
+.bs-footer .regions {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 28px;
+}
+
+.bs-footer .regions li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--line);
+  font-weight: 300;
+  letter-spacing: 0.02em;
+  color: #fff;
+}
+
+.bs-footer .regions li::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  flex: none;
+  transform: rotate(45deg);
+  background: var(--gold);
+}
+
+.bs-footer .regions li.wide {
+  grid-column: 1 / -1;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.bs-footer .row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 15px 0;
+  border-bottom: 1px solid var(--line);
+  color: #fff;
+  text-decoration: none;
+  transition:
+    color 0.25s,
+    padding-left 0.25s;
+}
+
+.bs-footer .row:hover {
+  color: var(--gold-light);
+  padding-left: 6px;
+}
+
+.bs-footer .ico {
+  width: 42px;
+  height: 42px;
+  flex: none;
+  border: 1px solid var(--line);
+  display: grid;
+  place-items: center;
+  transition:
+    border-color 0.25s,
+    background 0.25s;
+}
+
+.bs-footer .row:hover .ico {
+  border-color: var(--gold);
+  background: rgba(212, 175, 55, 0.1);
+}
+
+.bs-footer .ico svg {
+  width: 19px;
+  height: 19px;
+  fill: none;
+  stroke: var(--gold);
+  stroke-width: 1.5;
+}
+
+.bs-footer .row small {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 300;
+  color: var(--soft);
+  margin-bottom: 2px;
+}
+
+.bs-footer .row b {
+  font-weight: 400;
+  font-size: 1.05rem;
+}
+
+.bs-footer .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 28px;
+  padding: 15px 30px;
+  color: #000;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  background: linear-gradient(
+    135deg,
+    var(--gold-light),
+    var(--gold) 55%,
+    var(--gold-deep)
+  );
+  border: 1px solid var(--gold);
+  transition:
+    background 0.3s,
+    color 0.3s;
+}
+
+.bs-footer .btn:hover {
+  background: transparent;
+  color: var(--gold-light);
+}
+
+.bs-footer .btn svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+.bs-footer .row:focus-visible,
+.bs-footer .btn:focus-visible {
+  outline: 2px solid var(--gold-light);
+  outline-offset: 3px;
+}
+
+.bs-footer .base {
+  border-top: 1px solid var(--line);
+}
+
+.bs-footer .base > div {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 22px 32px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 0.82rem;
+  font-weight: 300;
+  color: var(--soft);
+}
+
+@media (max-width: 860px) {
+  .bs-footer .cols {
+    grid-template-columns: 1fr;
+    gap: 48px;
+    padding: 44px 24px 48px;
+  }
+
+  .bs-footer .crest {
+    padding: 56px 24px 40px;
+  }
+
+  .bs-footer .base > div {
+    padding: 20px 24px;
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+@media (max-width: 420px) {
+  .bs-footer .regions {
+    grid-template-columns: 1fr;
+  }
+}
