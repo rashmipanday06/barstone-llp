@@ -1,35 +1,29 @@
 import { Routes, Route } from "react-router-dom";
 
 import Home from "../pages/Home/Home";
-import About from "../pages/About/About";
-import Practices from "../pages/Practices/Practices";
 import PracticeDetails from "../pages/Practices/PracticeDetails";
-import People from "../pages/People/People";
-import Insights from "../pages/Insights/Insights";
-import Careers from "../pages/Careers/Careers";
-import Contact from "../pages/Contact/Contact";
+
 
 const AppRoutes = () => {
   return (
     <Routes>
+      {/* Homepage */}
       <Route path="/" element={<Home />} />
 
-      <Route path="/about" element={<About />} />
+      {/* Homepage sections */}
+      <Route path="/about" element={<Home />} />
+      <Route path="/practices" element={<Home />} />
+      <Route path="/people" element={<Home />} />
+      <Route path="/insights" element={<Home />} />
+      <Route path="/careers" element={<Home />} />
+      <Route path="/contact" element={<Home />} />
 
-      <Route path="/practices" element={<Practices />} />
-
+      {/* Individual practice */}
       <Route
         path="/practices/:slug"
         element={<PracticeDetails />}
       />
 
-      <Route path="/people" element={<People />} />
-
-      <Route path="/insights" element={<Insights />} />
-
-      <Route path="/careers" element={<Careers />} />
-
-      <Route path="/contact" element={<Contact />} />
     </Routes>
   );
 };

@@ -1,12 +1,28 @@
 import { motion } from "framer-motion";
 import { ArrowDown, ArrowRight } from "lucide-react";
 import Container from "../common/Container";
+import { useNavigate } from "react-router-dom";
 
 const Hero = () => {
+  const navigate = useNavigate();
+
+const handleSectionNavigation = (
+  path: string,
+  sectionId: string
+) => {
+  navigate(path, { replace: true });
+
+  setTimeout(() => {
+    document.getElementById(sectionId)?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  }, 0);
+};
   return (
     <section
       id="hero"
-      className="relative flex min-h-screen items-center overflow-hidden bg-[#0B0B0B] pt-24"
+      className="relative flex min-h-screen items-center overflow-hidden bg-[#0B0B0B]"
     >
       {/* Background */}
       <div className="pointer-events-none absolute inset-0">
@@ -21,7 +37,7 @@ const Hero = () => {
       <div className="absolute left-0 top-0 h-px w-full bg-gradient-to-r from-transparent via-[#C9A45C] to-transparent" />
 
       <Container className="relative z-10">
-        <div className="grid min-h-[calc(100vh-96px)] items-center gap-16 py-20 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20">
+        <div className="grid min-h-[calc(100vh-150px)] items-center gap-16 py-20 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20">
 
           {/* Content */}
           <motion.div
@@ -53,26 +69,28 @@ const Hero = () => {
               and commercial requirements.
             </p>
 
-            <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-              <a
-                href="/practices"
-                className="group inline-flex items-center justify-center gap-3 border border-[#C9A45C] bg-[#C9A45C] px-7 py-3.5 font-sans text-[10px] font-semibold uppercase tracking-[0.22em] text-[#0B0B0B] transition-all duration-300 hover:bg-[#D8B978]"
-              >
-                Our Practices
+<div className="mt-10 flex flex-col gap-4 sm:flex-row">
+  <button
+    type="button"
+    onClick={() => handleSectionNavigation("/practices", "practices")}
+    className="group inline-flex items-center justify-center gap-3 border border-[#C9A45C] bg-[#C9A45C] px-7 py-3.5 font-sans text-[10px] font-semibold uppercase tracking-[0.22em] text-[#0B0B0B] transition-all duration-300 hover:bg-[#D8B978]"
+  >
+    Our Practices
 
-                <ArrowRight
-                  size={15}
-                  className="transition-transform duration-300 group-hover:translate-x-1"
-                />
-              </a>
+    <ArrowRight
+      size={15}
+      className="transition-transform duration-300 group-hover:translate-x-1"
+    />
+  </button>
 
-              <a
-                href="/about"
-                className="inline-flex items-center justify-center border border-[#2A2A2A] px-7 py-3.5 font-sans text-[10px] font-semibold uppercase tracking-[0.22em] !text-[#EDE6D6] transition-all duration-300 hover:!border-[#C9A45C] hover:!text-[#C9A45C]"
-              >
-                About Barstone
-              </a>
-            </div>
+  <button
+    type="button"
+    onClick={() => handleSectionNavigation("/about", "about")}
+    className="inline-flex items-center justify-center border border-[#2A2A2A] px-7 py-3.5 font-sans text-[10px] font-semibold uppercase tracking-[0.22em] !text-[#EDE6D6] transition-all duration-300 hover:!border-[#C9A45C] hover:!text-[#C9A45C]"
+  >
+    About Barstone
+  </button>
+</div>
           </motion.div>
 
           {/* Right visual */}

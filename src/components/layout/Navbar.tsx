@@ -1,31 +1,55 @@
-
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import {
+  Link,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 
 import Container from "../common/Container";
 import { BarstoneLogo } from "../common/Logo";
 
 const nav = [
-  { label: "About", href: "/about" },
-  { label: "Practices", href: "/practices" },
-  { label: "People", href: "/people" },
-  { label: "Insights", href: "/insights" },
-  { label: "Careers", href: "/careers" },
+  { label: "About", path: "/about", section: "about" },
+  {
+    label: "Practices",
+    path: "/practices",
+    section: "practices",
+  },
+  { label: "People", path: "/people", section: "people" },
+  {
+    label: "Sector & Industries",
+    path: "/insights",
+    section: "insights",
+  },
+  {
+    label: "Careers",
+    path: "/careers",
+    section: "careers",
+  },
+  {
+    label: "Contact",
+    path: "/contact",
+    section: "contact",
+  },
 ];
-
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(true);
   const [active, setActive] = useState("About");
 
+  const navigate = useNavigate();
+  const location = useLocation();
+
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 24);
     };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("scroll", handleScroll, {
+      passive: true,
+    });
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -40,7 +64,40 @@ const Navbar = () => {
     };
   }, [open]);
 
+  // Scroll to the requested homepage section
+  // after the URL changes.
+  useEffect(() => {
+    const currentSection = nav.find(
+      (item) => item.path === location.pathname
+    );
+
+    if (!currentSection) return;
+
+    const element = document.getElementById(
+      currentSection.section
+    );
+
+    if (!element) return;
+
+    requestAnimationFrame(() => {
+      element.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    });
+  }, [location.pathname]);
+
   const solid = scrolled || open;
+
+  const handleSectionNavigation = (
+    path: string,
+    label: string
+  ) => {
+    setActive(label);
+    setOpen(false);
+
+    navigate(path);
+  };
 
   return (
     <header
@@ -52,7 +109,6 @@ const Navbar = () => {
         background: solid
           ? "#0B0B0B"
           : "rgba(10,10,10,.7)",
-        // backdropFilter: "blur(10px)",
         boxShadow: solid
           ? "0 10px 30px -12px rgba(0,0,0,.8)"
           : "none",
@@ -76,17 +132,25 @@ const Navbar = () => {
           }}
         >
           {/* Logo */}
-          <Link
-            to="/"
-            aria-label="Barstone LLP home"
-            onClick={() => setActive("")}
-          >
-            <BarstoneLogo
-              variant="horizontal"
-              theme="dark"
-              size={scrolled ? 48 : 56}
-            />
-          </Link>
+        <Link
+          to="/"
+          aria-label="Barstone LLP home"
+          onClick={() => {
+            setActive("");
+            setOpen(false);
+
+            window.scrollTo({
+              top: 0,
+              behavior: "smooth",
+            });
+          }}
+        >
+          <BarstoneLogo
+            variant="horizontal"
+            theme="dark"
+            size={scrolled ? 48 : 56}
+          />
+        </Link>
 
           {/* Desktop navigation */}
           <nav
@@ -97,21 +161,28 @@ const Navbar = () => {
             aria-label="Primary navigation"
           >
             {nav.map((item) => (
-              <Link
+              <a
                 key={item.label}
-                to={item.href}
+                href={item.path}
                 className={`bs-link ${
                   active === item.label ? "on" : ""
                 }`}
-                onClick={() => setActive(item.label)}
+                onClick={(event) => {
+                  event.preventDefault();
+
+                  handleSectionNavigation(
+                    item.path,
+                    item.label
+                  );
+                }}
               >
                 {item.label}
-              </Link>
+              </a>
             ))}
 
-            <Link to="/contact" className="bs-cta">
+            {/* <Link to="/contact" className="bs-cta">
               <span>CONTACT</span>
-            </Link>
+            </Link> */}
           </nav>
 
           {/* Mobile menu button */}
@@ -141,9 +212,9 @@ const Navbar = () => {
               aria-label="Mobile navigation"
             >
               {nav.map((item) => (
-                <Link
+                <a
                   key={item.label}
-                  to={item.href}
+                  href={item.path}
                   className="bs-mlink"
                   style={{
                     color:
@@ -151,9 +222,13 @@ const Navbar = () => {
                         ? "#E9B99B"
                         : undefined,
                   }}
-                  onClick={() => {
-                    setActive(item.label);
-                    setOpen(false);
+                  onClick={(event) => {
+                    event.preventDefault();
+
+                    handleSectionNavigation(
+                      item.path,
+                      item.label
+                    );
                   }}
                 >
                   <span>{item.label}</span>
@@ -163,11 +238,12 @@ const Navbar = () => {
                     style={{
                       width: 6,
                       height: 6,
-                      background: "rgba(233,185,155,.6)",
+                      background:
+                        "rgba(233,185,155,.6)",
                       transform: "rotate(45deg)",
                     }}
                   />
-                </Link>
+                </a>
               ))}
 
               <Link
@@ -178,7 +254,8 @@ const Navbar = () => {
                   background: "#E9B99B",
                   color: "#0A0A0A",
                   borderColor: "#E9B99B",
-                  fontFamily: "'Cormorant Garamond', serif",
+                  fontFamily:
+                    "'Cormorant Garamond', serif",
                   fontWeight: 600,
                   letterSpacing: ".22em",
                   fontSize: 14,
@@ -196,4 +273,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
