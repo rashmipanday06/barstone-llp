@@ -95,7 +95,7 @@ const PracticeDetails = () => {
           </div>
 
           <div className="flex gap-5 overflow-x-auto pb-6 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-            {practice.services.map((service, index) => (
+            {practice.services.map((service) => (
               <article
                 key={service.id}
                 className="group min-w-[300px] shrink-0 border border-[#2A2A2A] bg-[#0B0B0B] p-8 transition-all duration-300 hover:border-[#C9A45C] md:min-w-[360px]"
